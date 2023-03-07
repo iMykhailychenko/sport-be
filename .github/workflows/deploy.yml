@@ -16,4 +16,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
+            cd /home/sport-fe || exit 1
+            git pull
             ./scripts/run-prod.sh
