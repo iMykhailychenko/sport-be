@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS exercises (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(250) NOT NULL,
+    description VARCHAR(500),
+    image VARCHAR(250),
+    user_id integer NOT NULL REFERENCES users(id) ON DELETE CASCADE REFERENCES users(id) DEFERRABLE INITIALLY DEFERRED
+);
