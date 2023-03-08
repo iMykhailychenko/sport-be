@@ -31,3 +31,8 @@ async def create_date(body: DateBody, user_id: int = Depends(get_current_user)) 
         )
 
     await crud.create_date(body, user_id)
+
+
+@router.delete('/{date_id}', status_code=status.HTTP_204_NO_CONTENT)
+async def delete_date(date_id: int, user_id: int = Depends(get_current_user)) -> None:
+    return await crud.delete_date(date_id, user_id)

@@ -1,4 +1,4 @@
-from app.dates.schemas import DateBody, DateType
+from app.dates.schemas import DateBody
 from db import database
 
 
@@ -37,3 +37,14 @@ async def create_date(body: DateBody, user_id: int) -> None:
         "user_id": user_id,
     }
     await database.execute(query=query, values=values)
+
+
+async def delete_date(date_id: int, user_id: int) -> None:
+    query = """
+    DELETE FROM dates 
+    WHERE id = :date_id AND user_id = :user_id
+    """
+    await database.execute(query=query, values={
+        "date_id": date_id,
+        "user_id": user_id
+    })

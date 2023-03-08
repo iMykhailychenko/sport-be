@@ -20,3 +20,8 @@ async def get_exercises(user_id: int = Depends(get_current_user)) -> List[Exerci
 @router.post('', status_code=status.HTTP_204_NO_CONTENT)
 async def create_exercises(body: ExerciseBody, user_id: int = Depends(get_current_user)) -> None:
     return await crud.create_exercises(body, user_id)
+
+
+@router.delete('/{exercise_id}', status_code=status.HTTP_204_NO_CONTENT)
+async def delete_exercise(exercise_id: int, user_id: int = Depends(get_current_user)) -> None:
+    return await crud.delete_exercise(exercise_id, user_id)

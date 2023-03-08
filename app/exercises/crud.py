@@ -31,3 +31,14 @@ async def create_exercises(body: ExerciseBody, user_id: int) -> None:
         "user_id": user_id,
     }
     await database.execute(query=query, values=values)
+
+
+async def delete_exercise(exercise_id: int, user_id: int) -> None:
+    query = """
+    DELETE FROM exercises 
+    WHERE id = :exercise_id AND user_id = :user_id
+    """
+    await database.execute(query=query, values={
+        "exercise_id": exercise_id,
+        "user_id": user_id
+    })
