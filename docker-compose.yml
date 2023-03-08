@@ -18,9 +18,9 @@ services:
     env_file:
       - .env
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - sport_postgres:/var/lib/postgresql/data
       - ./migrations:/app/migrations
       - ./scripts:/app/scripts
 
 volumes:
-  postgres:
+  sport_postgres:

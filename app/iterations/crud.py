@@ -9,16 +9,16 @@ async def create_iteration(body: IterationBody, user_id: int) -> None:
         weight,
         repeat,
         date_id,
-        user_id,
-        training_id
+        exercise_id,
+        user_id
     )
     VALUES (
         :time,
         :weight,
         :repeat,
         :date_id,
-        :user_id,
-        :training_id
+        :exercise_id,
+        :user_id
     )
     """
     values = {
@@ -26,27 +26,28 @@ async def create_iteration(body: IterationBody, user_id: int) -> None:
         "weight": body.weight,
         "repeat": body.repeat,
         "date_id": body.date_id,
-        "user_id": user_id,
-        "training_id": body.training_id
+        "exercise_id": body.exercise_id,
+        "user_id": user_id
     }
     await database.execute(query=query, values=values)
 
 
-async def get_iterations(date_id: str, training_id: int, user_id: int) -> list:
+async def get_iterations(date_id: int, exercise_id: int, user_id: int) -> list:
     query = """
     SELECT
+        id,
         time,
         weight,
         repeat,
         date_id,
-        training_id
+        exercise_id
     FROM iterations
-    WHERE training_id = :training_id AND date_id = :date_id AND user_id = :user_id
+    WHERE date_id = :date_id AND exercise_id = :exercise_id AND user_id = :user_id
     """
     values = {
         "date_id": date_id,
+        "exercise_id": exercise_id,
         "user_id": user_id,
-        "training_id": training_id
     }
     return await database.fetch_all(query=query, values=values)
 

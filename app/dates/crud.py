@@ -33,7 +33,7 @@ async def create_date(body: DateBody, user_id: int) -> None:
     values = {
         "value": body.value,
         "comment": body.comment,
-        "training_id": body.trainingId,
+        "training_id": body.training_id,
         "user_id": user_id,
     }
     await database.execute(query=query, values=values)

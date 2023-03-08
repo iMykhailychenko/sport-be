@@ -5,12 +5,12 @@ from pydantic import BaseModel
 
 class DateBody(BaseModel):
     value: str
-    trainingId: int
+    training_id: int
     comment: Optional[str]
 
 
 class DateType(BaseModel):
     id: int
     value: str
-    trainingId: int
+    training_id: int
     comment: Optional[str]

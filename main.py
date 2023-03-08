@@ -8,6 +8,7 @@ from app.users import users
 from app.dates import dates
 from app.exercises import exercises
 from app.trainings import trainings
+from app.iterations import iterations
 
 app = FastAPI()
 
@@ -23,6 +24,7 @@ app.include_router(users.router)
 app.include_router(dates.router)
 app.include_router(exercises.router)
 app.include_router(trainings.router)
+app.include_router(iterations.router)
 
 
 @app.on_event("startup")

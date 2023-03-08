@@ -19,7 +19,7 @@ async def get_date(date: str, user_id: int = Depends(get_current_user)) -> DateT
             detail="Not found",
         )
 
-    return DateType(**result, trainingId=result["training_id"])
+    return DateType(**result)
 
 
 @router.post('', status_code=status.HTTP_204_NO_CONTENT)

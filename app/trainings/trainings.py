@@ -24,7 +24,13 @@ async def get_all_trainings(training_id: int, user_id: int = Depends(get_current
 
 @router.delete('/{training_id}', status_code=status.HTTP_204_NO_CONTENT)
 async def delete_training(training_id: int, user_id: int = Depends(get_current_user)) -> None:
-    return await crud.delete_training(training_id, user_id)
+    await crud.delete_training(training_id, user_id)
+
+
+@router.delete('/{training_id}/{exercise_id}', status_code=status.HTTP_204_NO_CONTENT)
+async def delete_training_exercise(training_id: int, exercise_id: int,
+                                   user_id: int = Depends(get_current_user)) -> None:
+    await crud.delete_training_exercise(training_id, exercise_id, user_id)
 
 
 @router.post('', status_code=status.HTTP_204_NO_CONTENT)
