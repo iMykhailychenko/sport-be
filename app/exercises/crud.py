@@ -10,7 +10,7 @@ async def get_single_exercise(exercise_id: int, user_id: int) -> dict:
 
 
 async def get_exercises(user_id: int) -> List[Exercise]:
-    query = "SELECT id, title, description, image FROM exercises WHERE user_id = :user_id"
+    query = "SELECT id, title, description, image FROM exercises WHERE user_id = :user_id ORDER BY title DESC"
     return await database.fetch_all(query=query, values={"user_id": user_id})
 
 
