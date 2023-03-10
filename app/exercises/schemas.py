@@ -9,8 +9,12 @@ class ExerciseBody(BaseModel):
     image: Optional[str]
 
 
-class Exercise(ExerciseBody):
+class UpdateExerciseBody(BaseModel):
     id: int
-    title: str
+    title: Optional[str]
     description: Optional[str]
     image: Optional[str]
+
+
+class Exercise(ExerciseBody):
+    id: int

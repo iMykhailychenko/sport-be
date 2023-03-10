@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -7,6 +9,13 @@ class IterationBody(BaseModel):
     repeat: int
     date_id: int
     exercise_id: int
+
+
+class UpdateIterationBody(BaseModel):
+    id: int
+    time: Optional[int]
+    weight: Optional[int]
+    repeat: Optional[int]
 
 
 class Iteration(BaseModel):

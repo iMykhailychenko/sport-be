@@ -8,6 +8,10 @@ class TrainingBody(BaseModel):
     exercises: List[int]
 
 
+class UpdateTrainingBody(TrainingBody):
+    id: int
+
+
 class Training(BaseModel):
     id: int
     title: str
