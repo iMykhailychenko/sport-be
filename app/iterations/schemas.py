@@ -25,3 +25,12 @@ class Iteration(BaseModel):
     repeat: int
     date_id: int
     exercise_id: int
+
+
+class ExerciseIterations(BaseModel):
+    id: int
+    time: int
+    weight: int
+    repeat: int
+    exercise_id: int
+    date: str

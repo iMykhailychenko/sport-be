@@ -80,7 +80,7 @@ async def add_training(body: DateTrainingBody, user_id: int) -> None:
 async def delete_exercise(date_id: int, exercise_id: int, user_id: int) -> None:
     query = """
     DELETE FROM dates 
-    WHERE date_id = :date_id AND exercise_id = :exercise_id AND user_id = :user_id
+    WHERE id = :date_id AND exercise_id = :exercise_id AND user_id = :user_id
     """
     values = {"date_id": date_id, "exercise_id": exercise_id, "user_id": user_id}
     await database.execute(query=query, values=values)

@@ -2,13 +2,34 @@ from app.iterations.schemas import IterationBody, UpdateIterationBody
 from db import database
 
 
-async def get_single_iteration(iteration_id: int, user_id: int):
+async def get_single_iteration(iteration_id: int, user_id: int) -> dict:
     query = "SELECT * FROM iterations WHERE id = :iteration_id AND user_id = :user_id"
     values = {"iteration_id": iteration_id, "user_id": user_id}
     return await database.fetch_one(query=query, values=values)
 
 
-async def get_iterations(date_id: int, exercise_id: int, user_id: int) -> list:
+async def get_exercise_iterations(exercise_id: int, user_id: int) -> list:
+    query = """
+    SELECT
+        iterations.id,
+        iterations.time,
+        iterations.weight,
+        iterations.repeat,
+        iterations.exercise_id,
+        dates.date
+    FROM iterations
+    INNER JOIN dates ON iterations.date_id = dates.id
+    WHERE iterations.exercise_id = :exercise_id AND iterations.user_id = :user_id
+    ORDER BY iterations.id DESC
+    """
+    values = {
+        "exercise_id": exercise_id,
+        "user_id": user_id,
+    }
+    return await database.fetch_all(query=query, values=values)
+
+
+async def get_date_iterations(date_id: int, exercise_id: int, user_id: int) -> list:
     query = """
     SELECT
         id,

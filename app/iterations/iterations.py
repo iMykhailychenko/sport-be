@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter, status, Depends
 
-from app.iterations.schemas import Iteration, IterationBody, UpdateIterationBody
+from app.iterations.schemas import Iteration, IterationBody, UpdateIterationBody, ExerciseIterations
 from app.iterations import crud
 from auth_token import get_current_user
 
@@ -12,9 +12,18 @@ router = APIRouter(
 )
 
 
+@router.get('/{exercise_id}', response_model=List[ExerciseIterations])
+async def get_exercise_iterations(exercise_id: int, user_id: int = Depends(get_current_user)) -> List[ExerciseIterations]:
+    return await crud.get_exercise_iterations(exercise_id, user_id)
+
+
 @router.get('/{date_id}/{exercise_id}', response_model=List[Iteration])
-async def get_iterations(date_id: int, exercise_id: int, user_id: int = Depends(get_current_user)) -> List[Iteration]:
-    return await crud.get_iterations(date_id, exercise_id, user_id)
+async def get_date_iterations(
+        date_id: int,
+        exercise_id: int,
+        user_id: int = Depends(get_current_user)
+) -> List[Iteration]:
+    return await crud.get_date_iterations(date_id, exercise_id, user_id)
 
 
 @router.post('', status_code=status.HTTP_204_NO_CONTENT)
