@@ -1,6 +1,18 @@
+from typing import List
+
 from app.dates.schemas import DateExerciseBody, DateTrainingBody
 from app.trainings.crud import get_training_exercises
 from db import database
+
+
+async def get_calendar(date: str, user_id: int) -> List[str]:
+    query = """
+        SELECT dates.date FROM dates
+        WHERE dates.user_id = :user_id AND dates.date ILIKE :date
+        """
+    result = await database.fetch_all(query=query, values={"user_id": user_id, "date": f"%{date}%"})
+
+    return list(set(map(lambda x: x.date, result)))
 
 
 async def is_exercise_exist(date: str, exercise_id: int, user_id: int) -> bool:

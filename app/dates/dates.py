@@ -12,6 +12,11 @@ router = APIRouter(
 )
 
 
+@router.get('/calendar/{date}', response_model=List[str])
+async def get_calendar(date: str, user_id: int = Depends(get_current_user)) -> List[str]:
+    return await crud.get_calendar(date, user_id)
+
+
 @router.get('/{date}', response_model=List[DateType])
 async def get_date_exercises(date: str, user_id: int = Depends(get_current_user)) -> List[DateType]:
     return await crud.get_date_exercises(date, user_id)
